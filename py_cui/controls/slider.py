@@ -8,18 +8,7 @@ import py_cui.keys
 class SliderImplementation(py_cui.ui.UIImplementation):
 
     def __init__(self, min_val: int, max_val: int, init_val: int, step: int, logger):
-        super().__init__(logger)
-
-        self._min_val = min_val
-        self._max_val = max_val
-        self._cur_val = init_val
-        self._step = step
-
-        self._bar_char = "#"
-
-        if self._cur_val < self._min_val or self._cur_val > self._max_val:
-            raise py_cui.errors.PyCUIInvalidValue(
-                f'initial value must be between {self._min_val} and {self._max_val}')
+        pass
 
 
     def set_bar_char(self, char: str) -> None:

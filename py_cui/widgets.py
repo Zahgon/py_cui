@@ -60,35 +60,7 @@ class Widget(py_cui.ui.UIElement):
         Class UIElement superclass initializer, and then assigns widget to grid, along with row/column info
         and color rules and key commands
         """
-
-        super().__init__(id, title, None, logger)
-        if grid is None:
-            raise py_cui.errors.PyCUIMissingParentError("Cannot add widget to NoneType")
-
-        self._grid = grid
-        grid_rows, grid_cols = self._grid.get_dimensions()
-        if (grid_cols < column + column_span) or (grid_rows < row + row_span):
-            raise py_cui.errors.PyCUIOutOfBoundsError(f"Target grid too small for widget {title}")
-
-        self._row          = row
-        self._column       = column
-        self._row_span     = row_span
-        self._column_span  = column_span
-        self._padx         = padx
-        self._pady         = pady
-        self._selectable       = selectable
-        self._key_commands: Dict[int,Callable[[],Any]]     = {}
-        self._mouse_commands: Dict[int,Callable[[],Any]]   = {}
-        self._text_color_rules: List['py_cui.ColorRule'] = []
-        self._default_color = py_cui.WHITE_ON_BLACK
-        self._border_color = self._default_color
-        self.update_height_width()
-
-        self._move_focus_map = {}
-        for mouse_event in py_cui.keys.MOUSE_EVENTS:
-            self._move_focus_map[mouse_event] = False
-
-        self._context_menu = None
+        pass
 
 
     def _get_parent_ui(self):
@@ -576,16 +548,7 @@ class Button(Widget):
     def __init__(self, id, title: str, grid: 'py_cui.grid.Grid', row: int, column: int, row_span: int, column_span: int, padx: int, pady: int, logger, command: Optional[Callable[[],Any]]):
         """Initializer for Button Widget
         """
-
-        super().__init__(id, title, grid, row, column, row_span, column_span, padx, pady, logger)
-        self.command = command
-        self.set_color(py_cui.MAGENTA_ON_BLACK)
-        self.set_help_text('Focus mode on Button. Press Enter to press button, Esc to exit focus mode.')
-
-        # By default we will process command on click or double click
-        if self.command is not None:
-            self.add_mouse_command(py_cui.keys.LEFT_MOUSE_CLICK, self.command)
-            self.add_mouse_command(py_cui.keys.LEFT_MOUSE_DBL_CLICK, self.command)
+        pass
 
 
     def _handle_key_press(self, key_pressed: int) -> None:

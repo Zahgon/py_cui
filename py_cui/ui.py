@@ -948,24 +948,7 @@ class TextBlockImplementation(UIImplementation):
 
         Zeros attributes, and parses initial text
         """
-
-        super().__init__(logger)
-        self._text_lines = initial_text.splitlines()
-        if len(self._text_lines) == 0:
-            self._text_lines.append('')
-
-        self._viewport_y_start   = 0
-        self._viewport_x_start   = 0
-        self._cursor_text_pos_x  = 0
-        self._cursor_text_pos_y  = 0
-        self._cursor_y           = 0
-        self._cursor_x           = 0
-        self._cursor_max_up      = 0
-        self._cursor_max_down    = 0
-        self._cursor_max_left    = 0
-        self._cursor_max_right   = 0
-        self._viewport_width     = 0
-        self._viewport_height    = 0
+        pass
 
 
     # Getters and setters

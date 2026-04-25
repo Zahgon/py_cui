@@ -40,30 +40,7 @@ class WidgetSet:
     def __init__(self, num_rows: int, num_cols: int, logger: 'py_cui.debug.PyCUILogger', root:'py_cui.PyCUI', simulated_terminal: Optional[List[int]] =None):
         """Constructor for WidgetSet
         """
-
-        self._widgets: Dict[int,Optional['py_cui.widgets.Widget']]      = {}
-        self._keybindings: Dict[int,Callable[[],Any]]  = {}
-
-        self._root = root
-        self._simulated_terminal = simulated_terminal
-
-        if self._simulated_terminal is None:
-            term_size = shutil.get_terminal_size()
-            height = term_size.lines
-            width = term_size.columns
-        else:
-            height  = self._simulated_terminal[0]
-            width   = self._simulated_terminal[1]
-
-        self._height = height
-        self._width = width
-        status_bars_height = self._root.title_bar.get_height() + self._root.status_bar.get_height()
-        self._height = self._height - status_bars_height - 2
-
-        self._grid = py_cui.grid.Grid(root, num_rows, num_cols, self._height, self._width, logger)
-
-        self._selected_widget: Optional[int] = None
-        self._logger = logger
+        pass
 
 
     def set_selected_widget(self, widget_id: int) -> None:

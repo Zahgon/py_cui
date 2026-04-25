@@ -188,22 +188,7 @@ class ColorRule:
         include_whitespace : bool
             Flag to determine whether to strip whitespace before matching.
         """
-        
-        self._regex            = regex
-        self._color            = color
-        self._selected_color   = selected_color
-        self._rule_type        = rule_type
-        self._match_type       = match_type
-        self._region           = region
-
-        if self._region is not None:
-            if self._region[0] > self._region[1]:
-                temp = region[0]
-                self._region[0] = self._region[1]
-                self._region[1] = temp
-
-        self._include_whitespace   = include_whitespace
-        self._logger               = logger
+        pass
 
 
     def _check_match(self, line: str) -> bool:

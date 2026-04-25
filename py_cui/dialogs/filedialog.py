@@ -49,20 +49,7 @@ class FileDirElem:
     def __init__(self, elem_type: str, name: str, fullpath: str, ascii_icons: bool=False):
         """Intializer for FilDirElem
         """
-
-        self._type = elem_type
-        self._name = name
-        self._path = fullpath
-
-        # Use unicode icons of folder and file, or use text instead
-        # for compatibility reasons.
-        if not ascii_icons:
-            self._folder_icon = '\U0001f4c1'
-            # Folder icon is two characters, so
-            self._file_icon = '\U0001f5ce' + ' '
-        else:
-            self._folder_icon = '<DIR>'
-            self._file_icon = '     '
+        pass
 
 
     def get_path(self) -> str:
@@ -284,16 +271,7 @@ class FileDialogButton(py_cui.ui.UIElement):
     def __init__(self, parent_dialog, statusbar_msg, command, button_num, *args):
         """Initializer for Button Widget
         """
-
-        super().__init__(*args)
-        self._parent_dialog = parent_dialog
-        if self.get_title() == 'OK':
-            self.set_color(py_cui.GREEN_ON_BLACK)
-        else:
-            self.set_color(py_cui.RED_ON_BLACK)
-        self.set_help_text(statusbar_msg)
-        self.command = command
-        self._button_num = button_num
+        pass
 
 
     def get_absolute_start_pos(self) -> Tuple[int,int]:
@@ -402,40 +380,7 @@ class FileDialogPopup(py_cui.popups.Popup):
     def __init__(self, root, callback, initial_dir, dialog_type, ascii_icons, limit_extensions, color, renderer, logger):
         """Initalizer for the FileDialogPopup
         """
-
-        # Convert dialog type into popup title message
-        title = ''
-        input_title = 'Path'
-        if dialog_type == 'openfile':
-            title = 'Open File'
-            input_title = 'New File'
-        elif dialog_type == 'opendir':
-            title = 'Open Directory'
-            input_title = 'New Dir'
-        elif dialog_type == 'saveas':
-            title = 'Save As'
-            input_title = 'New Name'
-
-        # Call superclass initailizer
-        py_cui.popups.Popup.__init__(self, root, title, '', color, renderer, logger)
-
-        # Our submit action must be a function that takes a string as its only parameter.
-        self._submit_action = callback
-        self._dialog_type = dialog_type
-
-        # Create our internal UI elements. Menu for selection, field for new elements, buttons for submit/cancel.
-        self._filename_input = FileNameInput(self, input_title, '', renderer, logger)
-        self._file_dir_select = FileSelectElement(self, initial_dir, dialog_type, ascii_icons, title, color, None, renderer, logger, limit_extensions=limit_extensions)
-        self._submit_button = FileDialogButton(self, title, self._submit, 1, '', 'OK', renderer, logger)
-        self._cancel_button = FileDialogButton(self, f'Cancel {title}', self._root.close_popup, 2, '', 'ESC', renderer, logger)
-
-        # Internal popup used for secondary errors and warnings
-        self._internal_popup = None
-
-        # Initialize current state.
-        self.update_height_width()
-        self._file_dir_select.set_selected(True)
-        self._currently_selected = self._file_dir_select
+        pass
 
 
     def _submit(self, output: str) -> None:

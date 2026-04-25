@@ -272,29 +272,7 @@ class FormPopup(py_cui.popups.Popup, FormImplementation):
 
     def __init__(self, root, fields, passwd_fields, required_fields, fields_init_text, title, color, renderer, logger):
 
-        self._num_fields = len(fields)
-        if self._num_fields != len(set(fields)):
-            raise DuplicateFormKeyError('PyCUI forms cannot have duplicate fields.')
-
-        py_cui.popups.Popup.__init__(self, root, title, '', color, renderer, logger)
-
-        self._form_fields: List['FormFieldElement'] = []
-        for i, field in enumerate(fields):
-            init_text = ''
-            if field in fields_init_text:
-                init_text = fields_init_text[field]
-            self._form_fields.append(FormFieldElement(self,
-                                              i,
-                                              field,
-                                              init_text,
-                                              (field in passwd_fields),
-                                              (field in required_fields),
-                                              renderer,
-                                              logger))
-        self._form_fields[0].set_selected(True)
-        FormImplementation.__init__(self, self._form_fields, required_fields, logger)
-
-        self._internal_popup = None
+        pass
 
 
     def get_num_fields(self) -> int:
