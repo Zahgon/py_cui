@@ -74,9 +74,7 @@ class WidgetSet:
         cell_title : str
             the title of the cell
         """
-
-        if widget_id in self._widgets.keys():
-            self._selected_widget = widget_id
+        pass
 
 
     def get_widgets(self) -> Dict[int, Optional['py_cui.widgets.Widget']]:
@@ -87,8 +85,7 @@ class WidgetSet:
         widgets : dict of str -> widget
             dictionary mapping widget IDs to object instances
         """
-
-        return self._widgets
+        pass
 
 
     def add_key_command(self, key: Union[int, List[int]], command: Callable[[],Any]) -> None:
@@ -101,12 +98,7 @@ class WidgetSet:
         command : Function
             A no-arg or lambda function to fire on keypress
         """
-
-        if isinstance(key, list):
-            for value in key:
-                self._keybindings[value] = command
-        else:
-            self._keybindings[key] = command
+        pass
 
 
 
@@ -137,20 +129,7 @@ class WidgetSet:
         TypeError
             If provided widget class is not a subclass of widget, a typeerror is raised.
         """
-
-        if not issubclass(widget_class, py_cui.widgets.Widget):
-            raise TypeError(f'Widget class {widget_class} is not a subclass of the base Widget class!')
-
-        id = len(self.get_widgets().keys())
-        new_widget = widget_class(id, title, self._grid, row, column, row_span, column_span, padx, pady, self._logger, *args, **kwargs)
-
-        self.get_widgets()[id] = new_widget
-
-        if self._selected_widget is None:
-            self.set_selected_widget(id)
-
-        self._logger.info(f'Adding widget {title} w/ ID {id} of type {str(widget_class)}')
-        return new_widget
+        pass
 
 
 
@@ -179,15 +158,7 @@ class WidgetSet:
         new_scroll_menu : ScrollMenu
             A reference to the created scroll menu object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.ScrollMenu,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady)
+        pass
 
 
     def add_checkbox_menu(self, title: str, row: int, column: int, row_span: int=1, column_span: int=1, padx: int=1, pady: int=0, checked_char: str='X') -> 'py_cui.widgets.CheckBoxMenu':
@@ -217,16 +188,7 @@ class WidgetSet:
         new_checkbox_menu : CheckBoxMenu
             A reference to the created checkbox object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.CheckBoxMenu,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady,
-                                      checked_char)
+        pass
 
 
     def add_text_box(self, title: str, row: int, column: int, row_span: int = 1, column_span: int = 1, padx: int = 1, pady: int = 0, initial_text: str = '', password: bool = False) -> 'py_cui.widgets.TextBox':
@@ -258,15 +220,7 @@ class WidgetSet:
         new_text_box : TextBox
             A reference to the created textbox object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.TextBox,
-                                      title,
-                                      row, column,
-                                      row_span,
-                                      column_span,
-                                      padx, pady,
-                                      initial_text,
-                                      password)
+        pass
 
 
     def add_text_block(self, title: str, row: int, column: int, row_span: int = 1, column_span: int = 1, padx: int = 1, pady: int = 0, initial_text: str = '') -> 'py_cui.widgets.ScrollTextBlock':
@@ -296,16 +250,7 @@ class WidgetSet:
         new_text_block : ScrollTextBlock
             A reference to the created textblock object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.ScrollTextBlock,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady,
-                                      initial_text)
+        pass
 
 
     def add_label(self, title: str, row: int, column: int, row_span: int = 1, column_span: int = 1, padx: int = 1, pady: int = 0) -> 'py_cui.widgets.Label':
@@ -333,15 +278,7 @@ class WidgetSet:
         new_label : Label
             A reference to the created label object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.Label,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady)
+        pass
 
 
     def add_block_label(self, title: str, row: int, column: int, row_span: int = 1, column_span: int = 1, padx: int = 1, pady: int = 0, center: bool=True) -> 'py_cui.widgets.BlockLabel':
@@ -371,16 +308,7 @@ class WidgetSet:
         new_label : BlockLabel
             A reference to the created block label object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.BlockLabel,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady,
-                                      center)
+        pass
 
 
     def add_button(self, title: str, row: int, column: int, row_span: int = 1, column_span: int = 1, padx: int = 1, pady: int = 0, command: Callable[[],Any]=None) -> 'py_cui.widgets.Button':
@@ -410,16 +338,7 @@ class WidgetSet:
         new_button : Button
             A reference to the created button object.
         """
-
-        return self.add_custom_widget(py_cui.widgets.Button,
-                               title,
-                               row,
-                               column,
-                               row_span,
-                               column_span,
-                               padx,
-                               pady,
-                               command)
+        pass
 
 
     def add_slider(self, title: str, row: int, column: int, row_span: int=1,
@@ -457,16 +376,4 @@ class WidgetSet:
         new_slider : Slider
             A reference to the created slider object.
         """
-
-        return self.add_custom_widget(py_cui.controls.slider.SliderWidget,
-                                      title,
-                                      row,
-                                      column,
-                                      row_span,
-                                      column_span,
-                                      padx,
-                                      pady,
-                                      min_val,
-                                      max_val,
-                                      step,
-                                      init_val)
+        pass

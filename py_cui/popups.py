@@ -65,8 +65,7 @@ class Popup(py_cui.ui.UIElement):
         text : str
             The new popup text
         """
-
-        self._text = text
+        pass
 
 
     def get_absolute_start_pos(self) -> Tuple[int,int]:
@@ -77,9 +76,7 @@ class Popup(py_cui.ui.UIElement):
         start_x, start_y : int
             The coords of the upper-left corner of the popup
         """
-
-        root_height, root_width = self._root.get_absolute_size()
-        return int(root_width / 4), int(root_height / 3)
+        pass
 
 
     def get_absolute_stop_pos(self) -> Tuple[int,int]:
@@ -90,9 +87,7 @@ class Popup(py_cui.ui.UIElement):
         stop_x, stop_y : int
             The coords of the lower-right corner of the popup
         """
-
-        root_height, root_width = self._root.get_absolute_size()
-        return (int(3 * root_width / 4)), (int(2 * root_height / 3))
+        pass
 
 
     def _handle_key_press(self, key_pressed: int) -> None:
@@ -105,9 +100,7 @@ class Popup(py_cui.ui.UIElement):
         key_pressed : int
             The ascii code for the key that was pressed
         """
-
-        if key_pressed in self._close_keys:
-            self._root.close_popup()
+        pass
 
 
     def _draw(self) -> None:
@@ -115,17 +108,7 @@ class Popup(py_cui.ui.UIElement):
 
         Can be implemented by subclass. Base draw function will draw the title and text in a bordered box
         """
-
-        target_y = int(self._stop_y - self._start_y / 2)
-        self._renderer.set_color_rules([])
-        self._renderer._set_bold()
-        self._renderer.set_color_mode(self._color)
-        self._renderer.draw_border(self, with_title=False)
-        self._renderer.draw_text(  self, self._title, target_y - 2, centered=True, selected=True)
-        self._renderer.draw_text(  self, self._text,  target_y,     centered=True, selected=True)
-        self._renderer.unset_color_mode(self._color)
-        self._renderer._unset_bold()
-        self._renderer.reset_cursor(self)
+        pass
 
 
 
@@ -147,8 +130,7 @@ class MessagePopup(Popup):
     def _draw(self) -> None:
         """Draw function for MessagePopup. Calls superclass draw()
         """
-
-        super()._draw()
+        pass
 
 
 class YesNoPopup(Popup):
@@ -176,29 +158,13 @@ class YesNoPopup(Popup):
         key_pressed : int
             key code of key pressed
         """
-
-        super()._handle_key_press(key_pressed)
-        valid_pressed = False
-        if key_pressed == py_cui.keys.KEY_Y_LOWER or key_pressed == py_cui.keys.KEY_Y_UPPER:
-            ret_val = True
-            valid_pressed = True
-        elif key_pressed == py_cui.keys.KEY_N_UPPER or key_pressed == py_cui.keys.KEY_N_LOWER:
-            ret_val = False
-            valid_pressed = True
-
-        if valid_pressed:
-            self._root.close_popup()
-            if self._command is not None:
-                self._command(ret_val)
-            else:
-                self._root.show_warning_popup('No Command Specified', 'The yes/no popup had no specified command!')
+        pass
 
 
     def _draw(self):
         """Uses base class draw function
         """
-
-        super()._draw()
+        pass
 
 
 class TextBoxPopup(Popup, py_cui.ui.TextBoxImplementation):
@@ -223,18 +189,7 @@ class TextBoxPopup(Popup, py_cui.ui.TextBoxImplementation):
     def update_height_width(self) -> None:
         """Need to update all cursor positions on resize
         """
-
-        Popup.update_height_width(self)
-        padx, pady              = self.get_padding()
-        start_x, start_y        = self.get_start_position()
-        height, width           = self.get_absolute_dimensions()
-        self._cursor_text_pos   = 0
-        self._cursor_x          = start_x + 2 + padx
-        self._initial_cursor = self._cursor_x 
-        self._cursor_max_left   = self._cursor_x
-        self._cursor_max_right  = start_x + width - 1 - pady
-        self._cursor_y          = start_y + int(height / 2) + 1
-        self._viewport_width    = self._cursor_max_right - self._cursor_max_left
+        pass
 
 
     def _handle_mouse_press(self, x: int, y: int, mouse_event) -> None:
@@ -245,17 +200,7 @@ class TextBoxPopup(Popup, py_cui.ui.TextBoxImplementation):
         x, y : int
             Coordinates of mouse press
         """
-
-        Popup._handle_mouse_press(self, x, y, mouse_event)
-        if y == self._cursor_y and x >= self._cursor_max_left and x <= self._cursor_max_right:
-            if x <= len(self._text) + self._cursor_max_left:
-                old_text_pos = self._cursor_text_pos
-                old_cursor_x = self._cursor_x
-                self._cursor_x = x
-                self._cursor_text_pos = old_text_pos + (x - old_cursor_x)
-            else:
-                self._cursor_x = self._cursor_max_left + len(self._text)
-                self._cursor_text_pos = len(self._text)
+        pass
 
 
     def _handle_key_press(self, key_pressed: int):
@@ -266,61 +211,13 @@ class TextBoxPopup(Popup, py_cui.ui.TextBoxImplementation):
         key_pressed : int
             key code of key pressed
         """
-
-        Popup._handle_key_press(self, key_pressed)
-        valid_pressed = False
-        if key_pressed == py_cui.keys.KEY_ENTER:
-            self._ret_val = self._text
-            valid_pressed = True
-
-        if valid_pressed:
-            self._root.close_popup()
-            if self._command is not None:
-                self._command(self._ret_val)
-            else:
-                self._root.show_warning_popup('No Command Specified', 'The Yes/No popup had no specified command')
-
-        if key_pressed == py_cui.keys.KEY_LEFT_ARROW:
-            self._move_left()
-        elif key_pressed == py_cui.keys.KEY_RIGHT_ARROW:
-            self._move_right()
-        elif key_pressed in py_cui.keys.KEY_BACKSPACE:
-            self._erase_char()
-        elif key_pressed == py_cui.keys.KEY_DELETE:
-            self._delete_char()
-        elif key_pressed == py_cui.keys.KEY_HOME:
-            self._jump_to_start()
-        elif key_pressed == py_cui.keys.KEY_END:
-            self._jump_to_end()
-        elif key_pressed > 31 and key_pressed < 128:
-            self._insert_char(key_pressed)
+        pass
 
 
     def _draw(self) -> None:
         """Override of base draw function
         """
-
-        self._renderer.set_color_mode(self._color)
-        self._renderer.set_color_rules([])
-        self._renderer.draw_text(self, self._title, self._cursor_y - 2, bordered=False, selected=True)
-        self._renderer.draw_border(self, fill=False, with_title=False)
-        render_text = self._text
-        if len(self._text) >self._viewport_width:
-            end = len(self._text) - (self._viewport_width)
-            if self._cursor_text_pos < end:
-                render_text = self._text[self._cursor_text_pos:self._cursor_text_pos + (self._viewport_width)]
-            else:
-                render_text = self._text[end:]
-        if self._password:
-            temp = '*' * len(render_text)
-            render_text = temp
-        self._renderer.draw_text(self, render_text, self._cursor_y, selected=self._selected)
-
-        if self._selected:
-            self._renderer.draw_cursor(self._cursor_y, self._cursor_x)
-        else:
-            self._renderer.reset_cursor(self, fill=False)
-        self._renderer.unset_color_mode(self._color)
+        pass
 
 
 class MenuPopup(Popup, py_cui.ui.MenuImplementation):
@@ -355,21 +252,7 @@ class MenuPopup(Popup, py_cui.ui.MenuImplementation):
         x, y : int
             Coordinates of mouse press
         """
-
-        # For either click or double click we want to jump to the clicked-on item
-        if mouse_event == py_cui.keys.LEFT_MOUSE_CLICK or mouse_event == py_cui.keys.LEFT_MOUSE_DBL_CLICK:
-            current = self.get_selected_item_index()
-            viewport_top = self._start_y + self._pady + 1
-
-            if viewport_top <= y and viewport_top + (len(self._view_items) - 1) - self._top_view >= y:
-                elem_clicked = y - viewport_top + self._top_view
-                self.set_selected_item_index(elem_clicked)
-
-                # For double clicks we also process the menu selection
-                if mouse_event == py_cui.keys.LEFT_MOUSE_DBL_CLICK:
-                    ret_val = self.get()
-                    self._root.close_popup()
-                    self._command(ret_val)
+        pass
 
 
 
@@ -383,55 +266,13 @@ class MenuPopup(Popup, py_cui.ui.MenuImplementation):
         key_pressed : int
             key code of key pressed
         """
-
-        Popup._handle_key_press(self, key_pressed)
-        valid_pressed = False
-        if key_pressed == py_cui.keys.KEY_ENTER:
-            ret_val = self.get()
-            valid_pressed = True
-        elif key_pressed == py_cui.keys.KEY_ESCAPE:
-            ret_val = None
-            valid_pressed = True
-
-        if valid_pressed:
-            self._root.close_popup()
-            if self._command is not None:
-                if ret_val is not None or self._run_command_if_none:
-                    self._command(ret_val)
-            else:
-                self._root.show_warning_popup('No Command Specified', 'The menu popup had no specified command')
-
-        if key_pressed == py_cui.keys.KEY_UP_ARROW:
-            self._scroll_up()
-        if key_pressed == py_cui.keys.KEY_DOWN_ARROW:
-            viewport_height = self._height - (2 * self._pady) - 3
-            self._scroll_down(viewport_height)
+        pass
 
 
     def _draw(self) -> None:
         """Overrides base class draw function
         """
-
-        self._renderer.set_color_mode(self._color)
-        self._renderer.draw_border(self)
-        self._renderer.set_color_rules([])
-        counter = self._pady + 1
-        line_counter = 0
-        for item in self._view_items:
-            line = str(item)
-            if line_counter < self._top_view:
-                line_counter = line_counter + 1
-            else:
-                if counter >= self._height - self._pady - 1:
-                    break
-                if line_counter == self.get_selected_item_index():
-                    self._renderer.draw_text(self, line, self._start_y + counter, selected=True)
-                else:
-                    self._renderer.draw_text(self, line, self._start_y + counter)
-                counter = counter + 1
-                line_counter = line_counter + 1
-        self._renderer.unset_color_mode(self._color)
-        self._renderer.reset_cursor(self)
+        pass
 
 
 class LoadingIconPopup(Popup):
@@ -476,14 +317,7 @@ class LoadingIconPopup(Popup):
     def _draw(self) -> None:
         """Overrides base draw function
         """
-
-        self._text = f'{self._message} ... {self._loading_icons[self._icon_counter]}'
-        self._icon_counter = self._icon_counter + 1
-        if self._icon_counter == len(self._loading_icons):
-            self._icon_counter = 0
-
-        # Use Superclass draw after new text is computed
-        super()._draw()
+        pass
 
 
 class LoadingBarPopup(Popup):
@@ -526,34 +360,10 @@ class LoadingBarPopup(Popup):
     def _increment_counter(self) -> None:
         """Function that increments an internal counter
         """
-
-        self._completed_items += 1
+        pass
 
 
     def _draw(self) -> None:
         """Override of base draw function
         """
-
-        width = self._stop_x - self._start_x
-        bar_width = 2 * int(width / 3)
-        items_per_bar_block = self._num_items / bar_width
-        bar_blocks_per_item = bar_width / self._num_items
-
-        if self._completed_items == self._num_items:
-            self._root.stop_loading_popup()
-
-        if items_per_bar_block >= 1:
-            completed_blocks = int(self._completed_items / items_per_bar_block)
-        else:
-            completed_blocks = int(bar_blocks_per_item * self._completed_items)
-
-        non_completed_blocks = bar_width - completed_blocks
-        self._icon_counter = self._icon_counter + 1
-        if self._icon_counter == len(self._loading_icons):
-            self._icon_counter = 0
-
-        self.set_text(f'{"#" * completed_blocks}{"-" * non_completed_blocks} \
-                       ({self._completed_items}/{self._num_items}) {self._loading_icons[self._icon_counter]}')
-
-        # Use Superclass draw after new text is computed
-        super()._draw()
+        pass

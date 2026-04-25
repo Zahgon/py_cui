@@ -31,9 +31,7 @@ class SliderImplementation(py_cui.ui.UIImplementation):
         char : str
             Character to represent progressive bar.
         """
-
-        assert len(char) == 1, f"char should contain exactly one character, got {len(char)} instead."
-        self._bar_char = char
+        pass
 
 
     def update_slider_value(self, offset: int) -> float:
@@ -50,17 +48,7 @@ class SliderImplementation(py_cui.ui.UIImplementation):
         self._cur_val: float
             Current slider value.
         """
-
-        # direction , 1 raise value, -1 lower value
-        self._cur_val += (offset * self._step)
-
-        if self._cur_val < self._min_val:
-            self._cur_val = self._min_val
-
-        elif self._cur_val > self._max_val:
-            self._cur_val = self._max_val
-
-        return self._cur_val
+        pass
 
 
     def get_slider_value(self) -> float:
@@ -72,8 +60,7 @@ class SliderImplementation(py_cui.ui.UIImplementation):
         self._cur_val: float
             Current slider value.
         """
-
-        return self._cur_val
+        pass
 
 
     def set_slider_step(self, step: int) -> None:
@@ -85,8 +72,7 @@ class SliderImplementation(py_cui.ui.UIImplementation):
         step : int
             Step size of the slider.
         """
-
-        self._step = step
+        pass
 
 
 class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
@@ -124,40 +110,37 @@ class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
     def toggle_title(self) -> None:
         """Toggles visibility of the widget's name.
         """
-
-        self._title_enabled = not self._title_enabled
+        pass
 
 
     def toggle_border(self) -> None:
         """Toggles visibility of the widget's border.
         """
-
-        self._border_enabled = not self._border_enabled
+        pass
 
 
     def toggle_value(self) -> None:
         """Toggles visibility of the widget's current value in integer.
         """
-
-        self._display_value = not self._display_value
+        pass
 
 
     def align_to_top(self) -> None:
         """Aligns widget height to top.
         """
-        self._alignment = "top"
+        pass
 
 
     def align_to_middle(self) -> None:
         """Aligns widget height to middle. default configuration.
         """
-        self._alignment = "mid"
+        pass
 
 
     def align_to_bottom(self) -> None:
         """Aligns widget height to bottom.
         """
-        self._alignment = "btm"
+        pass
 
 
     def _custom_draw_with_border(self, start_y: int, content: str) -> None:
@@ -171,28 +154,7 @@ class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
         content: str
             string to be drawn inside the border
         """
-
-        # having closer reference allow faster access. More dot access means more scopes to search for.
-        renderer = self.get_renderer()
-        ui_element = self
-
-        renderer.set_color_mode(ui_element.get_border_color())
-
-        if ui_element.is_selected():
-            renderer._set_bold()
-            renderer._draw_border_top(ui_element, start_y, False)
-
-            renderer.draw_text(ui_element, content, start_y + 1, selected=True, bordered=True)
-            renderer._set_bold()
-
-            renderer._draw_border_bottom(ui_element, start_y + 2)
-            renderer._unset_bold()
-        else:
-            renderer._draw_border_top(ui_element, start_y, False)
-            renderer.draw_text(ui_element, content, start_y + 1, selected=False, bordered=True)
-            renderer._draw_border_bottom(ui_element, start_y + 2)
-
-        renderer.unset_color_mode(ui_element.get_border_color())
+        pass
 
 
     def _generate_bar(self, width: int) -> str:
@@ -209,53 +171,13 @@ class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
         progress: str
             progressive bar string  with length of width.
         """
-        if self._display_value:
-            min_string = str(self._min_val)
-            value_str = str(int(self._cur_val))
-
-            width -= len(min_string)
-
-            bar = self._bar_char * int((width * (self._cur_val - self._min_val)) / (self._max_val - self._min_val))
-            progress = (self._bar_char * len(min_string) + bar)[: -len(value_str)] + value_str
-        else:
-            progress = self._bar_char * int((width * (self._cur_val - self._min_val)) / (self._max_val - self._min_val))
-
-        return progress
+        pass
 
 
     def _draw(self) -> None:
         """Override of base class draw function.
         """
-
-        super()._draw()
-        self._renderer.set_color_mode(self._color)
-
-        height, width = self.get_absolute_dimensions()
-        visual_height = (2 if self._border_enabled else 0) + (1 if self._title_enabled else 0)
-
-        if self._alignment == "top":
-            text_y_pos = self._start_y
-        elif self._alignment == "mid":
-            text_y_pos = self._start_y + ((height - visual_height) // 2)
-        else:
-            text_y_pos = self._start_y + height - visual_height - 1
-
-        if self._title_enabled:
-            self._renderer.draw_text(
-                self, self.get_title(), text_y_pos, selected=self.is_selected(), bordered=False
-            )
-            text_y_pos += 1
-
-        if self._border_enabled:
-            width -= 6
-            self._custom_draw_with_border(text_y_pos, self._generate_bar(width))
-        else:
-            width -= 2
-            self._renderer.draw_text(
-                self, self._generate_bar(width), text_y_pos, selected=self.is_selected(), bordered=False
-            )
-
-        self._renderer.unset_color_mode(self._color)
+        pass
 
 
     def _handle_key_press(self, key_pressed: int) -> None:
@@ -267,12 +189,7 @@ class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
         key_pressed : int
             key code of pressed key
         """
-
-        super()._handle_key_press(key_pressed)
-        if key_pressed == py_cui.keys.KEY_LEFT_ARROW:
-            self.update_slider_value(-1)
-        if key_pressed == py_cui.keys.KEY_RIGHT_ARROW:
-            self.update_slider_value(1)
+        pass
 
 
     def _handle_mouse_press(self, x: int, y: int, mouse_event: int):
@@ -287,29 +204,7 @@ class SliderWidget(py_cui.widgets.Widget, SliderImplementation):
         mouse_event : int
             Mouse event type code
         """
-
-        super()._handle_mouse_press(x, y, mouse_event)
-        if mouse_event == py_cui.keys.LEFT_MOUSE_CLICK or mouse_event == py_cui.keys.LEFT_MOUSE_RELEASED:
-            x_start, _ = self.get_absolute_start_pos()
-            x_stop, _  = self.get_absolute_stop_pos()
-
-            # Get first x postion where the progress bar exists
-            x_start = x_start + 2 + self._padx
-
-            # Get last x postion where the progress bar exists
-            x_stop = x_stop - 2 - self._padx
-
-            if x < x_start or x > x_stop:
-                pass
-            else:
-                num_characters_to_press = x - x_start
-                prop_of_slider = num_characters_to_press / (x_stop - x_start)
-                slider_val_width = self._max_val - self._min_val
-                self._cur_val = int(prop_of_slider * slider_val_width) + self._min_val
-
-                # Round up. Avoids awkward situation where mousepress is to the right of the slider pos
-                if not (prop_of_slider * slider_val_width).is_integer():
-                    self._cur_val += 1
+        pass
 
 
 class SliderPopup(py_cui.popups.Popup, SliderImplementation):

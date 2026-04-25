@@ -219,28 +219,7 @@ class ColorRule:
         matched : bool
             True if a match was found, false otherwise
         """
-
-        temp = line
-        if not self._include_whitespace:
-            temp = temp.strip()
-        if self._rule_type == 'startswith':
-            if temp.startswith(self._regex):
-                return True
-        elif self._rule_type == 'endswith':
-            if temp.endswith(self._regex):
-                return True
-        elif self._rule_type == 'notstartswith':
-            if temp.startswith(self._regex):
-                return False
-            return True
-        elif self._rule_type == 'notendswith':
-            if temp.endswith(self._regex):
-                return False
-            return True
-        elif self._rule_type == 'contains':
-            if re.search(self._regex, line) is not None:
-                return True
-        return False
+        pass
 
 
     def _generate_fragments_regex(self, widget: Union['py_cui.widgets.Widget','py_cui.ui.UIElement'], render_text:str, selected) -> List[List[Union[int,str]]]:
@@ -258,27 +237,7 @@ class ColorRule:
         fragments : list of lists of [str, color]
             the render text split into fragments of strings paired with colors
         """
-
-        fragments: List[List[Union[int,str]]] = []
-        matches = re.findall(self._regex, render_text)
-        current_render_text = render_text
-        for match in matches:
-            temp = current_render_text.split(match, 1)
-            if len(temp) == 2:
-                if selected:
-                    fragments.append([temp[0], widget.get_selected_color()])
-                    fragments.append([match, self._selected_color])
-                else:
-                    fragments.append([temp[0], widget.get_color()])
-                    fragments.append([match, self._color])
-                current_render_text = temp[1]
-
-        if selected:
-            fragments.append([current_render_text, widget.get_selected_color()])
-        else:
-            fragments.append([current_render_text, widget.get_color()])
-
-        return fragments
+        pass
 
 
     def _split_text_on_region(self, widget: Union['py_cui.widgets.Widget','py_cui.ui.UIElement'], render_text: str, selected) -> List[List[Union[str,int]]]:   # renderer._generate_text_color_fragments passes a uielement and not a widget
@@ -296,31 +255,7 @@ class ColorRule:
         fragments : list of lists of [str, color]
             the render text split into fragments of strings paired with colors
         """
-
-        fragments: List[List[Union[int,str]]] = []
-        
-        if self._region is None or len(render_text) < self._region[0]:
-            if selected:
-                return [[render_text, widget.get_selected_color()]]
-            else:
-                return [[render_text, widget.get_color()]]
-        elif len(render_text) < self._region[1]:
-            self._region[1] = len(render_text)
-        
-        if self._region[0] != 0:
-            if selected:
-                fragments.append([render_text[0:self._region[0]], widget.get_selected_color()])
-            else:
-                fragments.append([render_text[0:self._region[0]], widget.get_color()])
-        
-        if selected:
-            fragments.append([render_text[self._region[0]:self._region[1]], self._selected_color])
-            fragments.append([render_text[self._region[1]:], widget.get_selected_color()])
-        else:
-            fragments.append([render_text[self._region[0]:self._region[1]], self._color])
-            fragments.append([render_text[self._region[1]:], widget.get_color()])
-
-        return fragments
+        pass
 
 
     def generate_fragments(self, widget: Union['py_cui.widgets.Widget','py_cui.ui.UIElement'], line: str, render_text: str, selected=False) -> Tuple[List[List[Union[str,int]]],bool]:
@@ -342,25 +277,4 @@ class ColorRule:
         matched : bool
             Boolean output saying if a match was found in the line.
         """
-        fragments: List[List[Union[int,str]]] = []
-        match       = self._check_match(line)
-        if selected:
-            fragments = [[render_text, widget.get_selected_color()]] 
-        else:
-            fragments = [[render_text, widget.get_color()]]
-        
-        if match:
-
-            if self._match_type == 'line':
-                if selected:
-                    fragments = [[render_text, self._selected_color]]
-                else:
-                    fragments = [[render_text, self._color]]
-            elif self._match_type == 'regex':
-                fragments = self._generate_fragments_regex(widget, render_text, selected)
-            elif self._match_type == 'region':
-                fragments = self._split_text_on_region(widget, render_text, selected)
-        
-            self._logger.debug(f'Generated fragments: {fragments}')
-        
-        return fragments, match
+        pass

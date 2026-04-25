@@ -98,9 +98,7 @@ class UIElement:
         height, width : int, int
             Dimensions of element in terminal characters
         """
-        start_x,    start_y = self.get_absolute_start_pos()
-        stop_x,     stop_y  = self.get_absolute_stop_pos()
-        return (stop_y - start_y), (stop_x - start_x)
+        pass
 
 
     def update_height_width(self) -> None:
@@ -108,10 +106,7 @@ class UIElement:
 
         If necessary, make sure required widget attributes updated here as well.
         """
-
-        self._start_x, self._start_y  = self.get_absolute_start_pos()
-        self._stop_x,  self._stop_y   = self.get_absolute_stop_pos()
-        self._height,  self._width    = self.get_absolute_dimensions()
+        pass
 
 
     def get_viewport_height(self) -> int:
@@ -122,8 +117,7 @@ class UIElement:
         viewport_height : int
             Height of element viewport in terminal characters
         """
-
-        return self._height - (2 * self._pady) - 3
+        pass
 
 
     def get_id(self) -> int:
@@ -134,8 +128,7 @@ class UIElement:
         id : int
             The ui element id
         """
-
-        return self._id
+        pass
 
 
     def get_title(self) -> str:
@@ -146,8 +139,7 @@ class UIElement:
         title : str
             UI element title
         """
-
-        return self._title
+        pass
 
 
     def get_padding(self) -> Tuple[int,int]:
@@ -158,8 +150,7 @@ class UIElement:
         padx, pady : int, int
             Padding on either axis in characters
         """
-
-        return self._padx, self._pady
+        pass
 
 
     def get_start_position(self) -> Tuple[int,int]:
@@ -170,8 +161,7 @@ class UIElement:
         start_x, start_y : int, int
             Coords of upper right corner
         """
-
-        return self._start_x, self._start_y
+        pass
 
 
     def get_stop_position(self) -> Tuple[int,int]:
@@ -182,8 +172,7 @@ class UIElement:
         stop_x, stop_y : int, int
             Coords of lower right corner
         """
-
-        return self._stop_x, self._stop_y
+        pass
 
 
     def get_color(self) -> int:
@@ -194,8 +183,7 @@ class UIElement:
         color : int
             color code for combination
         """
-
-        return self._color
+        pass
 
 
     def get_border_color(self) -> int:
@@ -206,11 +194,7 @@ class UIElement:
         color : int
             color code for combination
         """
-
-        if self._selected:
-            return self._focus_border_color
-        else:
-            return self._border_color
+        pass
 
 
     def get_selected_color(self) -> int:
@@ -221,8 +205,7 @@ class UIElement:
         color : int
             color code for combination
         """
-
-        return self._selected_color
+        pass
 
 
     def is_selected(self) -> bool:
@@ -233,8 +216,7 @@ class UIElement:
         selected : bool
             True if selected, False otherwise
         """
-
-        return self._selected
+        pass
 
 
     def get_renderer(self) -> 'py_cui.renderer.Renderer':
@@ -245,8 +227,7 @@ class UIElement:
         renderer : py_cui.renderer.Render
             renderer object used for drawing element
         """
-
-        return self._renderer
+        pass
 
 
     def get_help_text(self) -> str:
@@ -257,8 +238,7 @@ class UIElement:
         help_text : str
             Current element status bar help message
         """
-
-        return self._help_text
+        pass
 
 
     def set_title(self, title: str):
@@ -269,8 +249,7 @@ class UIElement:
         title : str
             New widget title
         """
-
-        self._title = title
+        pass
 
 
     def set_color(self, color: int) -> None:
@@ -281,14 +260,7 @@ class UIElement:
         color : int
             New color pair key code
         """
-
-        if self._border_color == self._color:
-            self._border_color = color
-        if self._focus_border_color == self._color:
-            self._focus_border_color = color
-        if self._selected_color == self._color:
-            self._selected_color = color
-        self._color = color
+        pass
 
 
     def set_border_color(self, color: int) -> None:
@@ -299,8 +271,7 @@ class UIElement:
         color : int
             New color pair key code
         """
-
-        self._border_color = color
+        pass
 
 
     def set_focus_border_color(self, color: int) -> None:
@@ -312,8 +283,7 @@ class UIElement:
         color : int
             New color pair key code
         """
-
-        self._focus_border_color = color
+        pass
 
 
     def set_selected_color(self, color: int) -> None:
@@ -324,8 +294,7 @@ class UIElement:
         color : int
             New color pair key code
         """
-
-        self._selected_color = color
+        pass
 
 
     def set_selected(self, selected: bool) -> None:
@@ -336,8 +305,7 @@ class UIElement:
         selected : bool
             The new selected state of the element
         """
-
-        self._selected = selected
+        pass
 
 
     def set_help_text(self, help_text: str) -> None:
@@ -348,8 +316,7 @@ class UIElement:
         help_text : str
             New statusbar help text
         """
-
-        self._help_text = help_text
+        pass
 
 
     def set_focus_text(self, focus_text: str) -> None:
@@ -360,8 +327,7 @@ class UIElement:
         focus_text : str
             New statusbar help text
         """
-
-        self._help_text = focus_text
+        pass
 
 
     def _handle_key_press(self, key_pressed):
@@ -405,15 +371,7 @@ class UIElement:
         error : PyCUIError
             If parameter is not an initialized renderer.
         """
-
-        if renderer is None:
-            self._logger.debug('Renderer to assign is a NoneType')
-        elif self._renderer is not None:
-            raise py_cui.errors.PyCUIError('Renderer already assigned for the element')
-        elif isinstance(renderer, py_cui.renderer.Renderer):
-            self._renderer = renderer
-        else:
-            raise py_cui.errors.PyCUIError('Invalid renderer, must be of type py_cui.renderer.Renderer')
+        pass
 
 
     def _contains_position(self, x: int, y: int) -> bool:
@@ -431,10 +389,7 @@ class UIElement:
         contains : bool
             True if (x,y) is within the element, false otherwise
         """
-
-        within_x = self._start_x <= x and self._start_x + self._width >= x
-        within_y = self._start_y <= y and self._start_y + self._height >= y
-        return within_x and within_y
+        pass
 
 
 class UIImplementation:
@@ -500,8 +455,7 @@ class TextBoxImplementation(UIImplementation):
         initial_cursor : int
             Initial position of the cursor
         """
-
-        return self._initial_cursor
+        pass
 
 
     def get_cursor_text_pos(self) -> int:
@@ -512,8 +466,7 @@ class TextBoxImplementation(UIImplementation):
         cursor_text_pos : int
             the cursor position relative to the text
         """
-
-        return self._cursor_text_pos
+        pass
 
 
     def get_cursor_limits(self) -> Tuple[int,int]:
@@ -524,8 +477,7 @@ class TextBoxImplementation(UIImplementation):
         cursor_max_left, cursor_max_right : int
             The cursor bounds of the text box
         """
-
-        return self._cursor_max_left, self._cursor_max_right
+        pass
 
 
     def get_cursor_position(self) -> Tuple[int,int]:
@@ -536,8 +488,7 @@ class TextBoxImplementation(UIImplementation):
         cursor_x, cursor_y : int
             The absolute positions of the cursor in the terminal window
         """
-
-        return self._cursor_x, self._cursor_y
+        pass
 
 
     def get_viewport_width(self) -> int:
@@ -548,8 +499,7 @@ class TextBoxImplementation(UIImplementation):
         viewport_width : int
             The width of the textbox viewport
         """
-
-        return self._viewport_width
+        pass
 
 
     def set_text(self, text: str):
@@ -560,12 +510,7 @@ class TextBoxImplementation(UIImplementation):
         text : str
             The text to write to the textbox
         """
-
-        self._text = text
-        if self._cursor_text_pos > len(self._text):
-            diff = self._cursor_text_pos - len(self._text)
-            self._cursor_text_pos = len(self._text)
-            self._cursor_x = self._cursor_x - diff
+        pass
 
 
     def get(self) -> str:
@@ -576,36 +521,25 @@ class TextBoxImplementation(UIImplementation):
         text : str
             The current textbox test
         """
-
-        return self._text
+        pass
 
 
     def clear(self) -> None:
         """Clears the text in the textbox
         """
-
-        self._cursor_x         = self._cursor_max_left
-        self._cursor_text_pos  = 0
-        self._text             = ''
+        pass
 
 
     def _move_left(self) -> None:
         """Shifts the cursor the the left. Internal use only
         """
-
-        if  self._cursor_text_pos > 0:
-            if self._cursor_x > self._cursor_max_left:
-                self._cursor_x = self._cursor_x - 1
-            self._cursor_text_pos = self._cursor_text_pos - 1
+        pass
 
 
     def _move_right(self) -> None:
         """Shifts the cursor the the right. Internal use only
         """
-        if self._cursor_text_pos < len(self._text):
-            if self._cursor_x < self._cursor_max_right:
-                self._cursor_x = self._cursor_x + 1
-            self._cursor_text_pos = self._cursor_text_pos + 1
+        pass
 
 
     def _insert_char(self, key_pressed: int) -> None:
@@ -616,45 +550,31 @@ class TextBoxImplementation(UIImplementation):
         key_pressed : int
             key code of key pressed
         """
-        self._text = self._text[:self._cursor_text_pos] + chr(key_pressed) + self._text[self._cursor_text_pos:]
-        if len(self._text) < self._viewport_width:
-            self._cursor_x = self._cursor_x + 1
-        self._cursor_text_pos = self._cursor_text_pos + 1
+        pass
 
 
     def _jump_to_start(self) -> None:
         """Jumps to the start of the textbox. Internal use only
         """
-
-        self._cursor_x = self._initial_cursor
-        self._cursor_text_pos = 0
+        pass
 
 
     def _jump_to_end(self) -> None:
         """Jumps to the end to the textbox. Internal use only
         """
-
-        self._cursor_text_pos = len(self._text)
-        self._cursor_x = self._initial_cursor + self._cursor_text_pos
+        pass
 
 
     def _erase_char(self) -> None:
         """Erases character at textbox cursor. Internal Use only
         """
-
-        if self._cursor_text_pos > 0:
-            self._text = self._text[:self._cursor_text_pos - 1] + self._text[self._cursor_text_pos:]
-            if len(self._text) < self._viewport_width:
-                self._cursor_x = self._cursor_x - 1
-            self._cursor_text_pos = self._cursor_text_pos - 1
+        pass
 
 
     def _delete_char(self) -> None:
         """Deletes character to right of texbox cursor. Internal use only
         """
-
-        if self._cursor_text_pos < len(self._text):
-            self._text = self._text[:self._cursor_text_pos] + self._text[self._cursor_text_pos + 1:]
+        pass
 
 
 class MenuImplementation(UIImplementation):
@@ -689,19 +609,13 @@ class MenuImplementation(UIImplementation):
     def toggle_stick_to_bottom(self):
         """Toggle option for keeping the viewport at the bottom of the items
         """
-
-        self._stick_to_bottom = not self._stick_to_bottom
+        pass
 
 
     def clear(self) -> None:
         """Clears all items from the Scroll Menu
         """
-
-        self._view_items = []
-        self._selected_item = 0
-        self._top_view = 0
-
-        self._logger.info('Clearing menu')
+        pass
 
 
     def set_on_selection_change_event(self, on_selection_change_event: Callable[[Any],Any]):
@@ -719,35 +633,12 @@ class MenuImplementation(UIImplementation):
         TypeError
             Raises a type error if event function is not callable
         """
-
-        #mypy false-positive
-        if not isinstance(on_selection_change_event, Callable):  #type: ignore
-            raise TypeError('On selection change event must be a Callable!')
-        
-        self._on_selection_change = on_selection_change_event
+        pass
 
 
     def _process_selection_change_event(self):
         """Function that executes on-selection change event either with the current menu item, or with no-args"""
-
-        # Identify num of args from callable. This allows for user to create commands that take in x, y
-        # coords of the mouse press as input
-        num_args = 0
-        try:
-            num_args = len(inspect.signature(self._on_selection_change).parameters)
-        except ValueError:
-            self._logger.error('Failed to get on_selection_change signature!')
-        except TypeError:
-            self._logger.error('Type of object not supported for signature identification!')
-
-        # Depending on the number of parameters for the self._on_selection_change, pass in the x and y
-        # values, or do nothing
-        if num_args == 1:
-            self._on_selection_change(self.get())
-        elif num_args == 0:
-            self._on_selection_change()
-        else:
-            raise ValueError('On selection change event must accept either 0 or 1 parameters!')
+        pass
 
 
     def get_selected_item_index(self) -> int:
@@ -758,8 +649,7 @@ class MenuImplementation(UIImplementation):
         selected_item : int
             the currently highlighted menu item
         """
-
-        return self._selected_item
+        pass
 
 
     def set_selected_item_index(self, selected_item_index: int) -> None:
@@ -770,20 +660,13 @@ class MenuImplementation(UIImplementation):
         selected_item : int
             The new selected item index
         """
-
-        self._selected_item = selected_item_index
+        pass
 
 
     def _scroll_up(self) -> None:
         """Function that scrolls the view up in the scroll menu
         """
-
-        if self._top_view > 0 and self._selected_item == self._top_view:
-            self._top_view = self._top_view - 1
-        if self._selected_item > 0:
-            self._selected_item = self._selected_item - 1
-
-        self._logger.debug(f'Scrolling up to item {self._selected_item}')
+        pass
 
 
     def _scroll_down(self, viewport_height: int) -> None:
@@ -796,21 +679,13 @@ class MenuImplementation(UIImplementation):
         viewport_height : int
             The number of visible viewport items
         """
-
-        if self._selected_item < len(self._view_items) - 1:
-            self._selected_item = self._selected_item + 1
-        if self._selected_item > self._top_view + viewport_height:
-            self._top_view = self._top_view + 1
-
-        self._logger.debug(f'Scrolling down to item {self._selected_item}')
+        pass
 
 
     def _jump_up(self) -> None:
         """Function for jumping up menu several spots at a time
         """
-
-        for _ in range(self._page_scroll_len):
-            self._scroll_up()
+        pass
 
 
     def _jump_down(self, viewport_height: int) -> None:
@@ -821,17 +696,13 @@ class MenuImplementation(UIImplementation):
         viewport_height : int
             The number of visible viewport items
         """
-
-        for _ in range(self._page_scroll_len):
-            self._scroll_down(viewport_height)
+        pass
 
 
     def _jump_to_top(self) -> None:
         """Function that jumps to the top of the menu
         """
-
-        self._top_view      = 0
-        self._selected_item = 0
+        pass
 
 
     def _jump_to_bottom(self, viewport_height: int) -> None:
@@ -842,11 +713,7 @@ class MenuImplementation(UIImplementation):
         viewport_height : int
             The number of visible viewport items
         """
-
-        self._selected_item = len(self._view_items) - 1
-        self._top_view = self._selected_item - viewport_height
-        if self._top_view < 0:
-            self._top_view = 0
+        pass
 
 
     def add_item(self, item: Any) -> None: 
@@ -857,12 +724,7 @@ class MenuImplementation(UIImplementation):
         item : Object
             Object to add to the menu. Must have implemented __str__ function
         """
-
-        self._logger.debug(f'Adding item {str(item)} to menu')
-        self._view_items.append(item)
-
-        if self._stick_to_bottom:
-            self.set_selected_item_index(len(self._view_items) - 1)
+        pass
 
 
     def add_item_list(self, item_list: List[Any]) -> None:
@@ -874,22 +736,13 @@ class MenuImplementation(UIImplementation):
         item_list : List[Object]
             list of objects to add as items to the scrollmenu
         """
-
-        self._logger.debug(f'Adding item list {str(item_list)} to menu')
-        for item in item_list:
-            self.add_item(item)
+        pass
 
 
     def remove_selected_item(self) -> None:
         """Function that removes the selected item from the scroll menu.
         """
-
-        if len(self._view_items) == 0:
-            return
-        self._logger.debug(f'Removing {str(self._view_items[self._selected_item])}')
-        del self._view_items[self._selected_item]
-        if self._selected_item >= len(self._view_items) and self._selected_item > 0:
-            self._selected_item = self._selected_item - 1
+        pass
 
 
     def remove_item(self, item: Any) -> None:
@@ -900,14 +753,7 @@ class MenuImplementation(UIImplementation):
         item : Object
             Reference of item to remove
         """
-
-        if len(self._view_items) == 0 or item not in self._view_items:
-            return
-        self._logger.debug(f'Removing {str(item)}')
-        i_index = self._view_items.index(item)
-        del self._view_items[i_index]
-        if self._selected_item >= i_index:
-            self._selected_item = self._selected_item - 1
+        pass
 
 
     def get_item_list(self) -> List[Any]:
@@ -918,8 +764,7 @@ class MenuImplementation(UIImplementation):
         item_list : List[Object]
             list of items in the scrollmenu
         """
-
-        return self._view_items
+        pass
 
 
     def get(self) -> Optional[Any]:
@@ -930,10 +775,7 @@ class MenuImplementation(UIImplementation):
         item : Object
             selected item, or None if there are no items in the menu
         """
-
-        if len(self._view_items) > 0:
-            return self._view_items[self._selected_item]
-        return None
+        pass
 
 
     def is_empty(self) -> bool:
@@ -944,8 +786,7 @@ class MenuImplementation(UIImplementation):
         bool
             True if menu has no items, False otherwise. Identical to len(self._view_items) == 0
         """
-
-        return len(self._view_items) == 0
+        pass
 
 
     def set_selected_item(self, selected_item: Any):
@@ -956,9 +797,7 @@ class MenuImplementation(UIImplementation):
         item : Object
             A new selected item to replace the current one
         """
-
-        if selected_item is not None and self.get() is not None:
-            self._view_items[self._selected_item] = selected_item
+        pass
 
 
     def get_item_index(self, index: int):
@@ -974,11 +813,7 @@ class MenuImplementation(UIImplementation):
         item : Any
             Item at specified index in the list, or None if index is invalid.
         """
-
-        try:
-            return self._view_items[index]
-        except IndexError:
-            return None
+        pass
 
 
     def set_item_index(self, item: Any, index: int):
@@ -991,9 +826,7 @@ class MenuImplementation(UIImplementation):
         index: int
             Index at which to put the specified item.
         """
-
-        if item is not None and len(self._view_items) > index and index >= 0:
-            self._view_items[index] = item
+        pass
 
 
 class CheckBoxMenuImplementation(MenuImplementation):
@@ -1024,17 +857,13 @@ class CheckBoxMenuImplementation(MenuImplementation):
         item : object
             The item being added
         """
-
-        super().add_item(item)
-        self._selected_item_dict[item] = False
+        pass
 
 
     def remove_selected_item(self) -> None:
         """Removes selected item from item list and selected item dictionary
         """
-
-        del self._selected_item_dict[self.get()]
-        super().remove_selected_item()
+        pass
 
 
     def remove_item(self, item) -> None:
@@ -1045,9 +874,7 @@ class CheckBoxMenuImplementation(MenuImplementation):
         item : object
             Item to remove from menu
         """
-
-        del self._selected_item_dict[item]
-        super().remove_item(item)
+        pass
 
 
     def toggle_item_checked(self, item: Any):
@@ -1058,8 +885,7 @@ class CheckBoxMenuImplementation(MenuImplementation):
         item : object
             Toggle item checked state
         """
-
-        self._selected_item_dict[item] = not self._selected_item_dict[item]
+        pass
 
 
     def mark_item_as_checked(self, item: Any) -> None:
@@ -1070,8 +896,7 @@ class CheckBoxMenuImplementation(MenuImplementation):
         item : object
             Toggle item checked state
         """
-
-        self._selected_item_dict[item] = True
+        pass
 
 
     def mark_item_as_not_checked(self, item) -> None:
@@ -1082,8 +907,7 @@ class CheckBoxMenuImplementation(MenuImplementation):
         item : object
             Item to uncheck
         """
-
-        self._selected_item_dict[item] = False
+        pass
 
 
 class DropdownMenuImplementation(MenuImplementation):
@@ -1154,8 +978,7 @@ class TextBlockImplementation(UIImplementation):
         viewport_x_start, viewport_y_start : int
             Initial location of viewport relative to text
         """
-
-        return self._viewport_x_start, self._viewport_y_start
+        pass
 
 
     def get_viewport_dims(self) -> Tuple[int,int]:
@@ -1166,8 +989,7 @@ class TextBlockImplementation(UIImplementation):
         viewport_height, viewport_width : int
             The dimensions of the viewport in characters
         """
-
-        return self._viewport_height, self._viewport_width
+        pass
 
 
     def get_cursor_text_pos(self) -> Tuple[int,int]:
@@ -1178,9 +1000,7 @@ class TextBlockImplementation(UIImplementation):
         cursor_text_pos_x, cursor_text_pos_y : int
             Cursor position relative to text
         """
-
-
-        return self._cursor_text_pos_x, self._cursor_text_pos_y
+        pass
 
 
     def get_abs_cursor_position(self) -> Tuple[int,int]:
@@ -1191,8 +1011,7 @@ class TextBlockImplementation(UIImplementation):
         cursor_x, cursor_y : int
             Absolute cursor position in characters
         """
-
-        return self._cursor_x, self._cursor_y
+        pass
 
 
     def get_cursor_limits_vertical(self) -> Tuple[int,int]:
@@ -1203,8 +1022,7 @@ class TextBlockImplementation(UIImplementation):
         cursor_max_up, cursor_max_down : int
             cursor limits in vertical space
         """
-
-        return self._cursor_max_up, self._cursor_max_down
+        pass
 
 
     def get_cursor_limits_horizontal(self) -> Tuple[int,int]:
@@ -1215,8 +1033,7 @@ class TextBlockImplementation(UIImplementation):
         cursor_max_left, cursor_max_right : int
             Cursor limits in horizontal space
         """
-
-        return self._cursor_max_left, self._cursor_max_right
+        pass
 
 
     def get(self) -> str:
@@ -1227,11 +1044,7 @@ class TextBlockImplementation(UIImplementation):
         text : str
             The current text in the text block
         """
-
-        text = ''
-        for line in self._text_lines:
-            text = f'{text}{line}\n'
-        return text
+        pass
 
 
     def write(self, text: str) -> None:
@@ -1242,27 +1055,13 @@ class TextBlockImplementation(UIImplementation):
         text : str
             Text to write to the text block
         """
-
-        lines = text.splitlines()
-        if len(self._text_lines) == 1 and self._text_lines[0] == '':
-            self.set_text(text)
-        else:
-            self._text_lines.extend(lines)
+        pass
 
 
     def clear(self) -> None:
         """Function that clears the text block
         """
-
-        self._cursor_x = self._cursor_max_left
-        self._cursor_y = self._cursor_max_up
-        self._viewport_y_start = 0
-        self._viewport_x_start = 0
-        self._cursor_text_pos_x = 0
-        self._cursor_text_pos_y = 0
-        self._text_lines = []
-        self._text_lines.append('')
-        self._logger.info('Cleared textblock')
+        pass
 
 
     def get_current_line(self) -> str:
@@ -1273,8 +1072,7 @@ class TextBlockImplementation(UIImplementation):
         current_line : str
             The current line of text that the cursor is on
         """
-
-        return self._text_lines[self._cursor_text_pos_y]
+        pass
 
 
     def set_text(self, text: str) -> None:
@@ -1287,16 +1085,7 @@ class TextBlockImplementation(UIImplementation):
         text : str
             text to write into text block
         """
-
-        self._text_lines = text.splitlines()
-        if len(self._text_lines) == 0:
-            self._text_lines.append('')
-
-        self._cursor_text_pos_y    = 0
-        self._cursor_y             = self._cursor_max_up
-        self._viewport_y_start     = 0
-        self._cursor_x             = self._cursor_max_left
-        self._cursor_text_pos_x    = 0
+        pass
 
 
     def set_text_line(self, text: str) -> None:
@@ -1309,161 +1098,62 @@ class TextBlockImplementation(UIImplementation):
         text : str
             text line to write into text block
         """
-
-        self._text_lines[self._cursor_text_pos_y] = text
+        pass
 
 
     def _move_left(self) -> None:
         """Function that moves the cursor/text position one location to the left
         """
-
-        if self._cursor_text_pos_x > 0:
-            if self._cursor_x > self._cursor_max_left:
-                self._cursor_x = self._cursor_x - 1
-            elif self._viewport_x_start > 0:
-                self._viewport_x_start = self._viewport_x_start - 1
-            self._cursor_text_pos_x = self._cursor_text_pos_x - 1
-
-        self._logger.debug(f'Moved cursor left to pos {self._cursor_text_pos_x}')
+        pass
 
 
     def _move_right(self) -> None:
         """Function that moves the cursor/text position one location to the right
         """
-
-        current_line = self.get_current_line()
-
-        if self._cursor_text_pos_x < len(current_line):
-            if self._cursor_x < self._cursor_max_right:
-                self._cursor_x = self._cursor_x + 1
-            elif self._viewport_x_start + self._viewport_width < len(current_line):
-                self._viewport_x_start = self._viewport_x_start + 1
-            self._cursor_text_pos_x = self._cursor_text_pos_x + 1
-
-        self._logger.debug(f'Moved cursor right to pos {self._cursor_text_pos_x}')
+        pass
 
 
     def _move_up(self) -> None:
         """Function that moves the cursor/text position one location up
         """
-
-
-        if self._cursor_text_pos_y > 0:
-            if self._cursor_y > self._cursor_max_up:
-                self._cursor_y = self._cursor_y - 1
-            elif self._viewport_y_start > 0:
-                self._viewport_y_start = self._viewport_y_start - 1
-            self._cursor_text_pos_y = self._cursor_text_pos_y - 1
-            if self._cursor_text_pos_x > len(self._text_lines[self._cursor_text_pos_y]):
-                temp = len(self._text_lines[self._cursor_text_pos_y])
-                self._cursor_x = self._cursor_x - (self._cursor_text_pos_x - temp)
-                self._cursor_text_pos_x = temp
-
-        self._logger.debug(f'Moved cursor up to line {self._cursor_text_pos_y}')
+        pass
 
 
     def _move_down(self) -> None:
         """Function that moves the cursor/text position one location down
         """
-
-        if self._cursor_text_pos_y < len(self._text_lines) - 1:
-            if self._cursor_y < self._cursor_max_down:
-                self._cursor_y = self._cursor_y + 1
-            elif self._viewport_y_start + self._viewport_height < len(self._text_lines):
-                self._viewport_y_start = self._viewport_y_start + 1
-            self._cursor_text_pos_y = self._cursor_text_pos_y + 1
-            if self._cursor_text_pos_x > len(self._text_lines[self._cursor_text_pos_y]):
-                temp = len(self._text_lines[self._cursor_text_pos_y])
-                self._cursor_x = self._cursor_x - (self._cursor_text_pos_x - temp)
-                self._cursor_text_pos_x = temp
-
-        self._logger.debug(f'Moved cursor down to line {self._cursor_text_pos_y}')
+        pass
 
 
 
     def _handle_newline(self) -> None:
         """Function that handles recieving newline characters in the text
         """
-
-        current_line = self.get_current_line()
-        self._logger.debug(f'Inserting newline in location {self._cursor_text_pos_x}')
-
-        new_line_1 = current_line[:self._cursor_text_pos_x]
-        new_line_2 = current_line[self._cursor_text_pos_x:]
-        self._text_lines[self._cursor_text_pos_y] = new_line_1
-        self._text_lines.insert(self._cursor_text_pos_y + 1, new_line_2)
-        self._cursor_text_pos_y = self._cursor_text_pos_y + 1
-        self._cursor_text_pos_x = 0
-        self._cursor_x = self._cursor_max_left
-        self._viewport_x_start = 0
-        if self._cursor_y < self._cursor_max_down:
-            self._cursor_y = self._cursor_y + 1
-        elif self._viewport_y_start + self._viewport_height < len(self._text_lines):
-            self._viewport_y_start = self._viewport_y_start + 1
+        pass
 
 
     def _handle_backspace(self) -> None:
         """Function that handles recieving backspace characters in the text
         """
-
-        current_line = self.get_current_line()
-        self._logger.debug(f'Inserting backspace in location {self._cursor_text_pos_x}')
-
-        if self._cursor_text_pos_x == 0 and self._cursor_text_pos_y != 0:
-            self._cursor_text_pos_x = len(self._text_lines[self._cursor_text_pos_y - 1])
-            self._text_lines[self._cursor_text_pos_y - 1] = self._text_lines[self._cursor_text_pos_y - 1] + self._text_lines[self._cursor_text_pos_y]
-            self._text_lines = self._text_lines[:self._cursor_text_pos_y] + self._text_lines[self._cursor_text_pos_y + 1:]
-            self._cursor_text_pos_y = self._cursor_text_pos_y - 1
-            self._cursor_x = self._cursor_max_left + self._cursor_text_pos_x
-            if self._cursor_y > self._cursor_max_up:
-                self._cursor_y = self._cursor_y - 1
-            elif self._viewport_y_start > 0:
-                self._viewport_y_start = self._viewport_y_start - 1
-        elif self._cursor_text_pos_x > 0:
-            self.set_text_line(current_line[:self._cursor_text_pos_x - 1] + current_line[self._cursor_text_pos_x:])
-            if len(current_line) <= self._viewport_width:
-                self._cursor_x = self._cursor_x - 1
-            self._cursor_text_pos_x = self._cursor_text_pos_x - 1
+        pass
 
 
     def _handle_home(self) -> None:
         """Function that handles recieving a home keypress
         """
-
-        self._logger.debug('Inserting Home')
-
-        self._cursor_x = self._cursor_max_left
-        self._cursor_text_pos_x = 0
-        self._viewport_x_start = 0
+        pass
 
 
     def _handle_end(self) -> None:
         """Function that handles recieving an end keypress
         """
-
-        current_line = self.get_current_line()
-        self._logger.debug('Inserting End')
-
-        self._cursor_text_pos_x = len(current_line)
-        if len(current_line) > self._viewport_width:
-            self._cursor_x = self._cursor_max_right
-            self._viewport_x_start = self._cursor_text_pos_x - self._viewport_width
-        else:
-            self._cursor_x = self._cursor_max_left + len(current_line)
+        pass
 
 
     def _handle_delete(self) -> None:
         """Function that handles recieving a delete keypress
         """
-
-        current_line = self.get_current_line()
-        self._logger.debug(f'Inserting delete to pos {self._cursor_text_pos_x}')
-
-        if self._cursor_text_pos_x == len(current_line) and self._cursor_text_pos_y < len(self._text_lines) - 1:
-            self._text_lines[self._cursor_text_pos_y] = self._text_lines[self._cursor_text_pos_y] + self._text_lines[self._cursor_text_pos_y + 1]
-            self._text_lines = self._text_lines[:self._cursor_text_pos_y+1] + self._text_lines[self._cursor_text_pos_y + 2:]
-        elif self._cursor_text_pos_x < len(current_line):
-            self.set_text_line(current_line[:self._cursor_text_pos_x] + current_line[self._cursor_text_pos_x+1:])
+        pass
 
 
     def _insert_char(self, key_pressed: int) -> None:
@@ -1474,13 +1164,4 @@ class TextBlockImplementation(UIImplementation):
         key_pressed : int
             key code of key pressed
         """
-
-        current_line = self.get_current_line()
-        self._logger.debug(f'Inserting character {chr(key_pressed)} to pos {self._cursor_text_pos_x}')
-
-        self.set_text_line(current_line[:self._cursor_text_pos_x] + chr(key_pressed) + current_line[self._cursor_text_pos_x:])
-        if len(current_line) <= self._viewport_width:
-            self._cursor_x = self._cursor_x + 1
-        elif self._viewport_x_start + self._viewport_width < len(current_line):
-            self._viewport_x_start = self._viewport_x_start + 1
-        self._cursor_text_pos_x = self._cursor_text_pos_x + 1
+        pass

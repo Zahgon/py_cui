@@ -41,8 +41,7 @@ class StatusBar:
         color : int
             statusbar color
         """
-
-        return self.__color
+        pass
 
 
     def get_text(self) -> str:
@@ -53,8 +52,7 @@ class StatusBar:
         text : str
             The statusbar text
         """
-
-        return self.__text
+        pass
 
 
     def set_color(self, color) -> None:
@@ -65,8 +63,7 @@ class StatusBar:
         color : int
             new statusbar color code
         """
-
-        self.__color = color
+        pass
 
 
     def set_text(self, text: str) -> None :
@@ -77,8 +74,7 @@ class StatusBar:
         text : str
             New statusbar text
         """
-
-        self.__text = text
+        pass
 
     def get_height(self) -> int :
         """Getter for status bar height in row
@@ -88,24 +84,16 @@ class StatusBar:
         height : int
             The statusbar height in row
         """
-
-        return self.__height
+        pass
 
     def show(self) -> None:
         """Sets the status bar height to 1"""
-
-        self.__height = 1
-        self._refresh_root_size()
+        pass
 
     def hide(self) -> None:
         """Sets the status bar height to 0"""
-
-        self.__height = 0
-        self._refresh_root_size()
+        pass
 
     def _refresh_root_size(self) -> None:
         """Resets the grid's title bar offset if needed and calls a UI size update."""
-
-        if self.__is_title_bar:
-            self.__root._grid._title_bar_offset = self.__height
-        self.__root._refresh_height_width()
+        pass

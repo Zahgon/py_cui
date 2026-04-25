@@ -41,11 +41,7 @@ def get_char_from_ascii(key_num: int) -> Optional[str]:
     char : character
         character converted from ascii
     """
-
-    if key_num is None:
-        return None
-
-    return chr(key_num)
+    pass
 
 
 # Supported py_cui keys
